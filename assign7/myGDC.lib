@@ -1,0 +1,58 @@
+				
+
+				include PCMAC.INC
+				.model small
+				.586
+				.data
+M   			Dw	?
+N       		Dw  ?
+prompt			db "myGDC is being accessed!", 10, 13, "$"	
+
+				.code
+				PUBLIC myGCD
+myGCD			proc
+				push ax
+				push bx
+				push cx
+				push dx; save all caller's registers
+
+				;the code for myGCD
+
+
+				_PutStr prompt
+
+
+
+while_1:
+				mov ax, M
+				cmp ax, N
+				je end_while_1
+
+body_1:
+
+if_1:			mov ax, N
+				cmp ax, M
+				jle else_1
+				mov ax, N
+				sub ax, M
+				mov N, ax
+				jmp end_1
+else_1:			mov ax, M
+				sub ax, N
+				mov M, ax
+
+end_1:
+
+				jmp while_1
+
+
+			
+end_while_1:
+
+				pop dx
+				pop cx
+				pop bx
+				pop ax
+				ret
+myGCD			endp
+				end
